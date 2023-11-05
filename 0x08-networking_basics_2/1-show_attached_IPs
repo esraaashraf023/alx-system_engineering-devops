@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # displays all active IPv4 IPs.
 
-ifconfig | awk -F "[: ]+" '/inet addr:/ && $4 != "127.0.0.1" { print $4 }'
+ifconfig | grep -Eo "inet (addr:)?([0-9]*\.){3}[0-9]*" | cut -b 11-
