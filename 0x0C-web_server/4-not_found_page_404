@@ -14,7 +14,7 @@ echo "server {
         internal;
     }
 
-    root /var/www/html;
+    root /usr/share/nginx/html;
     index index.html index.htm;
 }" > /etc/nginx/sites-available/default
 
