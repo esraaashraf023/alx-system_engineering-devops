@@ -25,5 +25,4 @@ frontend www-frontend
 backend www-backend
     mode http
     balance roundrobin
-    server web-server1 192.168.0.1:80 check
-    server web-server2 192.168.0.2:80 check
+    server web-server1 52.91.122.111 check
