@@ -34,5 +34,5 @@ frontend https
     default_backend www-backend
 
 backend www-backend
-    server 323097-web-01 52.91.122.111:80 check
-    server 323097-web-01 34.204.91.199:80 check
+    server web-server-1 52.91.122.111:80 check
+    server web-server-2 34.204.91.199:80 check
