@@ -36,10 +36,9 @@ defaults
 
 frontend haproxy_balancer
         bind *:80
-        bind *:443 ssl crt /etc/haproxy/certs/esraaashraf.tech.pem
+        bind *:443 ssl crt /etc/haproxy/certs/cfg.tech.pem
         default_backend webservers
 
 backend webservers
 	    balance roundrobin
-    	server 336956-web-01 52.91.122.111:80 check
-    	server 336956-web-02 34.204.91.199:80 check
+    	server 323097-web-02 34.204.91.199:80 check
