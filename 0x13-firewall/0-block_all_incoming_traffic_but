@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Configures a ufw firewall to block all incoming traffic
-
+# Configures a ufw firewall..
 # install ufw
 sudo apt-get update
 sudo apt-get install ufw
