@@ -11,7 +11,6 @@ if __name__ == '__main__':
     employee_id = sys.argv[1]
 
     url = "https://jsonplaceholder.typicode.com/"
-
     user = requests.get(url + "users/{}".format(sys.argv[1])).json()
     todos = requests.get(url + "todos", params={"userId": sys.argv[1]}).json()
 
