@@ -9,16 +9,23 @@ if __name__ == '__main__':
     if len(sys.argv) != 2:
         print('Usage: python3 todo.py EMPLOYEE_ID')
         sys.exit(1)
+    
     employee_id = sys.argv[1]
 
     url = "https://jsonplaceholder.typicode.com/"
 
-    user = requests.get(url + "users/{}".format(sys.argv[1])).json()
-    todos = requests.get(url + "todos", params={"userId": sys.argv[1]}).json()
+    # Fetch user data
+    user = requests.get(url + "users/{}".format(employee_id)).json()
 
-    completed = [task.get('title') for task in todos if task.get('completed')]
-    print("Employee {:s} is done with tasks({:d}/{:d}):".format(
-        user.get('name'), len(completed), len(todos)
-    ))
+    # Fetch todo data for the specified user
+    todos = requests.get(url + "todos", params={"userId": employee_id}).json()
 
-    [print("\t {:s}".format(task)) for task in completed]
+    # Count completed tasks
+    done_tasks = sum(1 for task in todos if task['completed'])
+
+    # Print employee information and completed tasks
+    print('Employee {} is done with tasks ({}/{}):'.format(
+        user['name'], done_tasks, len(todos)))
+    for task in todos:
+        if task['completed']:
+            print('\t{}'.format(task['title']))
