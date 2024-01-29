@@ -13,11 +13,16 @@ if __name__ == '__main__':
 
     url = "https://jsonplaceholder.typicode.com/"
 
-    user = requests.get(url + "users/{}".format(sys.argv[1])).json()
-    todos = requests.get(url + "todos", params={"userId": sys.argv[1]}).json()
+    # Fetch user data
+    user_data = requests.get(url + "users/{}".format(employee_id)).json()
 
-    with open("{}.csv".format(user_id), "w", newline="") as csvfile:
+    # Fetch todo data for the specified user
+    todo_data = requests.get(url + "todos", params={"userId": employee_id}).json()
+
+    with open("{}.csv".format(employee_id), "w", newline="") as csvfile:
         writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-        [writer.writerow([user_id, user_data.get("username"),
-            item.get("completed"), item.get("title")]
-            ) for item in todo_data]
+        writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+
+        for item in todo_data:
+            writer.writerow([user_data['id'], user_data.get("username"),
+                             str(item.get("completed")), item.get("title")])
