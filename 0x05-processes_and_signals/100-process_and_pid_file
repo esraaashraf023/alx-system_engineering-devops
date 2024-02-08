@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Process and PID file
+
+path='/var/run/myscript.pid'
+
+terminator() {
+	rm $path
+		exit
+}
+
+echo "$$" > $path
+
+while true; do
+echo "To infinity and beyond"
+sleep 2
+trap 'echo "Y U no love me?!"' SIGINT
+trap 'echo "I hate the kill command" && terminator' SIGTERM
+trap 'terminator' SIGQUIT
+done
