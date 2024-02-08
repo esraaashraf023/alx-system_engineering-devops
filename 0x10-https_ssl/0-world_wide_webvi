@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Bash script that will display information about subdomains.
+
+output () {
+  domain="$1"
+  subdomain="${domain%%.*}"
+  answer_section=$(dig "$domain" | grep -A1 'ANSWER SECTION:' | grep -v 'ANSWER SECTION:')
+  echo "$answer_section" | awk -v subdomain="$subdomain" '{printf "The subdomain %s is a %s record and points to %s\n", subdomain, $4, $5}'
+}
+
+if [ $# -eq 1 ]; then
+  output "www.$1"
+  output "lb-01.$1"
+  output "web-01.$1"
+  output "web-02.$1"
+elif [ $# -eq 2 ]; then
+  output "$2.$1"
+else
+  echo "Usage: $0 <domain> [subdomain]"
+  exit 1
+fi
