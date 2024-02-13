@@ -1,15 +1,21 @@
 #!/usr/bin/python3
-"""Module that queries the Reddit API"""
-
+"""
+Python script that, using this REST API, for a given subreddit,
+returns the number of subscribers
+"""
 import requests
 
 
 def number_of_subscribers(subreddit):
-    """prints the number of subscribers for a given subreddit"""
-    url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
-    headers = {'User-Agent': 'Unfortunately I had to use a custom one'}
+    """
+    Returns the number of subscribers for a given subreddit.
+    """
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    response = requests.get(url, headers=headers)
 
-    req = requests.get(url, headers=headers).json()
-    subs = req.get('data', {}).get('subscribers', 0)
-
-    return subs
+    if response.status_code == 200:
+        data = response.json()
+        return data['data']['subscribers']
+    else:
+        return 0
