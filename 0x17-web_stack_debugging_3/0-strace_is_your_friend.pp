@@ -5,3 +5,4 @@ exec { 'fix_apache_error':
   path        => '/usr/bin',
   refreshonly => true,
 }
+
