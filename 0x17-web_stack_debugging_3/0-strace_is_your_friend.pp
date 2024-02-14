@@ -1,6 +1,7 @@
 # Fix the issue based on the strace output
 
-exec { 'fix-error':
-	command => 'sed -i s/phpp/php/g /var/www/html/wp-settings.php',
-		path    => '/usr/local/bin/:/bin/'
+exec { 'fix_apache_error':
+  command     => '/usr/sbin/service apache2 restart',
+  path        => '/usr/bin',
+  refreshonly => true,
 }
